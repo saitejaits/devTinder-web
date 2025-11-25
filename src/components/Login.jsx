@@ -10,7 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState("saiTeja@1532");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [ error , setError ] = useState("");
+  
   const handleLogin = async () => {
     try {
       const response = await axios.post(
@@ -21,9 +22,7 @@ const Login = () => {
       dispatch(addUser(response.data));
       navigate("/");
     } catch (error) {
-      console.log("Error Status:", error.response?.status);
-      console.log("Error Data:", error.response?.data); // Backend error message
-      console.log("Error Message:", error.message);
+      setError( error?.response?.data || "Something went wrong")
     }
   };
 
@@ -50,6 +49,7 @@ const Login = () => {
               />
             </fieldset>
           </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center">
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
