@@ -7,7 +7,7 @@ import { removeUser } from "../utils/userSlice";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
-  console.log("user:-", user);
+  // console.log("user:-", user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

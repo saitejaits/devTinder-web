@@ -22,7 +22,6 @@ const Body = () => {
       if (error.status) {
         navigate("/login");
       }
-      console.log("fetchUser ERROR:-", error);
     }
   };
 
