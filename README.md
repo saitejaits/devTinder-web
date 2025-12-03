@@ -26,7 +26,9 @@
 - Logout Feature
 - Get the Feed and add the feed in the store
 - build the user card on feed
-- Profile
+- Edit Profile Feature
+- Show Toast message on show message
+- See all my connections
 
 
 - Body 
