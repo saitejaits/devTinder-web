@@ -26,7 +26,8 @@ const Body = () => {
   };
 
   useEffect(() => {
-    if (!userData) {
+    const isPublicRoute = window.location.pathname === "/login" || window.location.pathname === "/signup"
+    if (!userData && !isPublicRoute) {
       fetchUser();
     }
   }, []);

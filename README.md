@@ -45,3 +45,9 @@ Remaining:
 -       Route=/login  => Login
 -       Route=/connection  => Connection
 -      Route=/profile  => Profile
+
+
+# Deployment
+- Signup on AWS
+- Launch instance
+- create mod 400 <secret>.pen

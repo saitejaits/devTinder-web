@@ -1,15 +1,18 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
 
-const UserCard = ({user}) => {
+const UserCard = ({user, hideButtons = false}) => {
     const dispatch = useDispatch()
     // console.log("user:-",user)
     const {firstName ,lastName,photoUrl,about,gender,age, _id} = user;
+    const [loading , setLoading] = useState(null)
 
     const handleSendRequest = async (status, userId) => {
+      if(loading) return;
+      setLoading(status);
       try {
         const response = await axios.post(
           BASE_URL + "/request/send/" + status + "/" + userId,
@@ -19,6 +22,8 @@ const UserCard = ({user}) => {
         dispatch(removeUserFromFeed(userId));
       } catch (error) {
         console.log("handleSendRequest Error:-",error)
+      } finally {
+         setLoading(null); // Re-enable button
       }
     }
 
@@ -35,11 +40,20 @@ const UserCard = ({user}) => {
         <h2 className="card-title">{firstName + " " + lastName}</h2>
         {age && gender &&<p>{age + " " + gender}</p>}
         <p>{about}</p>
-        <div className="card-actions justify-center my-4">
-          <button className="btn btn-primary" onClick={() => handleSendRequest("ignored",_id)}>Igonre</button>
-          <button className="btn btn-secondary" onClick={() => handleSendRequest("interested",_id)}>Interested</button>
+        {!hideButtons && (
+          <div className="card-actions justify-center my-4">
+          <button className="btn btn-primary" 
+          onClick={() => handleSendRequest("ignore",_id)}
+          disabled={loading !== null}
+          >{loading ? <span className="loading loading-dots loading-xl"></span> : "Igonre"}</button>
+          <button className="btn btn-secondary" 
+          onClick={() => handleSendRequest("interested",_id)}
+          disabled={loading !== null}
+          >{loading ? <span className="loading loading-dots loading-xl"></span> :"Interested"}</button>
 
         </div>
+        )}
+        
       </div>
     </div>
   );
