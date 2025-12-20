@@ -22,9 +22,10 @@ const NavBar = () => {
   }
 
   return (
-    <div className="navbar bg-base-300 ">
-      <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">DevTinder</Link>
+    <div className="navbar bg-base-300 flex justify-between">
+      <div className="flex">
+        <img src="./public/Small.svg" height="60px" width="60px"/>
+        <Link to="/" className="btn btn-ghost text-xl">DateNest</Link>
       </div>
       {user && (
       <div className="flex gap-2  items-center">
