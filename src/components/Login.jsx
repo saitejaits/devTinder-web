@@ -36,7 +36,6 @@ const Login = () => {
         {firstName, lastName,emailId,password},
         {withCredentials: true}
       );
-      console.log("handleSignUp:-",response.data.data)
       dispatch(addUser(response.data.data));
       return navigate("/profile")
     } catch (error) {
@@ -93,9 +92,6 @@ const Login = () => {
               {isLoginForm ? "Login" : "Sign Up"}
             </button>
           </div>
-          <p className="m-auto cursor-pointer py-2" onClick={() => setIsLoginForm((value) => !value)}>
-            {isLoginForm ? "New User? Signup Here" : "Existing User? Login Here"}
-            </p>
         </div>
       </div>
     </div>

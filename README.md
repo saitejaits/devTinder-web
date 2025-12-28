@@ -51,3 +51,7 @@ Remaining:
 - Signup on AWS
 - Launch instance
 - create mod 400 <secret>.pen
+
+
+# Razorpay Payment Gateway Integration
+- Sign up on Razorpay  & complete KYC
