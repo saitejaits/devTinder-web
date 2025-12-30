@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
@@ -10,60 +10,71 @@ const NavBar = () => {
   // console.log("user:-", user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogout = async ( ) => {
     try {
       await axios.post(BASE_URL + "/logout",{}, {withCredentials: true});
       dispatch(removeUser());
+      setMenuOpen(false);
       navigate("/login")
     } catch (error) {
       
     }
   }
 
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
+  }, []);
+
   return (
-    <div className="navbar bg-base-300 flex justify-between">
-      <div className="flex">
-        <img src="./public/Small.svg" height="60px" width="60px"/>
-        <Link to="/" className="btn btn-ghost text-xl">DateNest</Link>
+    <div className="navbar">
+      <div className="navbar-left">
+        <img src="./public/Small.svg"  className="navbar-logo"/>
+        <Link to="/" className="navbar-title">DateNest</Link>
       </div>
       {user && (
-      <div className="flex gap-2  items-center">
-        <div className="form-control ">Welcome, {user.firstName}</div>
-          <div className="dropdown dropdown-end mx-5 ">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
+      <div className="navbar-right">
+        <div className="welcome-text ">Welcome, {user.firstName}</div>
+
+          <div className="profile-dropdown" ref={dropdownRef}>
                 <img
                   alt="user photo"
                   src={user.photoUrl}
+                  className="avatar"
+                  onClick={(e) => { e.stopPropagation(); setMenuOpen(open => !open); }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter') { setMenuOpen(o => !o); } }}
                 />
-              </div>
-            </div>
             <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className={`dropdown-menu ${menuOpen ? 'open' : ''}`}
+              style={{ display: menuOpen ? 'block' : 'none' }}
             >
               <li>
-                <Link to="/profile" className="justify-between" 
-                onClick={() => document.activeElement.blur()}
+                <Link to="/profile" 
+                onClick={() => setMenuOpen(false)}
                 >
                   Profile
-                  <span className="badge">New</span>
+                  {/* <span className="badge">New</span> */}
                 </Link>
               </li>
               <li>
-                <Link to="/connections" onClick={() => document.activeElement.blur()}>Connections</Link>
+                <Link to="/connections" onClick={() => setMenuOpen(false)}>Connections</Link>
               </li>
               <li>
-                <Link to="/requests" onClick={() => document.activeElement.blur()}>Requests</Link>
+                <Link to="/requests" onClick={() => setMenuOpen(false)}>Requests</Link>
               </li>
               <li>
                 <a  onClick={() => {
-                  document.activeElement.blur()
+                  setMenuOpen(false);
                   handleLogout();
                   }} >Logout</a>
               </li>

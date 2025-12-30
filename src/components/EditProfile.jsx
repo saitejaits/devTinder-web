@@ -47,114 +47,75 @@ const EditProfile = ({ user }) => {
   };
 
   return (
-    <div className="flex justify-center my-10">
-      <div className="flex justify-center mx-10">
-        <div className="card bg-base-300 w-96 shadow-sm">
-          <div className="card-body">
-            <h2 className="card-title justify-center">Edit Profile</h2>
-            <div>
-              <fieldset className="fieldset py-1">
-                <legend className="fieldset-legend">FirstName:</legend>
-                <input
-                  type="text"
-                  className="input"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
-                <legend className="fieldset-legend">LastName:</legend>
-                <input
-                  type="text"
-                  className="input"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
-                <legend className="fieldset-legend">Photo Url:</legend>
-                <input
-                  type="text"
-                  className="input"
-                  value={photoUrl}
-                  onChange={(e) => setPhotoUrl(e.target.value)}
-                />
-                <div className="row two-cols">
-                  <div>
-                    <legend className="fieldset-legend">Bio:</legend>
-                    <input
-                      type="text"
-                      className="input"
-                      value={bio}
-                      onChange={(e) => setBio(e.target.value)}
-                    />
-                  </div>
+  <div className="edit-profile-page">
+    <div className="edit-profile-layout">
+      
+      {/* EDIT PROFILE FORM ONLY */}
+      <div className="edit-profile-card">
+        <h2 className="edit-title">Edit Profile</h2>
 
-                  <div>
-                    <legend className="fieldset-legend">Age:</legend>
-                    <input
-                      type="number"
-                      className="input"
-                      value={age}
-                      onChange={(e) => setAge(e.target.value)}
-                      min={5}
-                    />
-                  </div>
-                </div>
+        <label>First Name</label>
+        <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
 
-                <div className="row two-cols">
-                  <div>
-                    <legend className="fieldset-legend">Gender:</legend>
-                    <select
-                      className="input"
-                      value={gender}
-                      onChange={(e) => setGender(e.target.value)}
-                    >
-                      <option value="">Select Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="others">Others</option>
-                    </select>
-                  </div>
+        <label>Last Name</label>
+        <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
 
-                  <div>
-                    <legend className="fieldset-legend">Interests:</legend>
-                    <input
-                      type="text"
-                      className="input"
-                      value={interests}
-                      onChange={(e) => setInterests(e.target.value)}
-                      placeholder="Travel, Music, Coding"
-                    />
-                  </div>
-                </div>
-                <legend className="fieldset-legend">About:</legend>
-                <input
-                  type="text"
-                  className="input"
-                  value={about}
-                  onChange={(e) => setAbout(e.target.value)}
-                />
-              </fieldset>
-            </div>
-            <p className="text-red-500">{error}</p>
-            <div className="card-actions justify-center">
-              <button className="btn btn-primary" onClick={saveProfile}>
-                Save Profile
-              </button>
-            </div>
+        <label>Photo URL</label>
+        <input type="text" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} />
+
+        <div className="two-fields">
+          <div>
+            <label>Bio</label>
+            <input type="text" value={bio} onChange={(e) => setBio(e.target.value)} />
+          </div>
+          <div>
+            <label>Age</label>
+            <input type="number" value={age} min={5} onChange={(e) => setAge(e.target.value)} />
           </div>
         </div>
+
+        <div className="two-fields">
+          <div>
+            <label>Gender</label>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Interests</label>
+            <input
+              type="text"
+              placeholder="Travel, Music, Coding"
+              value={interests}
+              onChange={(e) => setInterests(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <label>About</label>
+        <input type="text" value={about} onChange={(e) => setAbout(e.target.value)} />
+
+        {error && <p className="form-error">{error}</p>}
+
+        <button className="save-profile-btn" onClick={saveProfile}>
+          Save Profile
+        </button>
       </div>
+      
+      {/* USER CARD (REUSED FROM FEED – NO CHANGE) */}
       <UserCard
-        user={{ firstName, lastName, age, gender, about, photoUrl ,bio}}
+        user={{ firstName, lastName, age, gender, about, photoUrl, bio }}
         hideButtons={true}
       />
-      {showToast && (
-        <div className="toast toast-top toast-center">
-          <div className="alert alert-success">
-            <span>Profile sent successfully.</span>
-          </div>
-        </div>
-      )}
+
     </div>
-  );
+  </div>
+);
+
 };
 
 export default EditProfile;

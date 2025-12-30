@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import NavBar from "./NavBar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
@@ -11,6 +11,7 @@ const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector((store) => store.user);
+  const location = useLocation();
 
   const fetchUser = async () => {
     try {
@@ -33,7 +34,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
+    <div className={location.pathname === "/profile" && "edit-page"}>
       <NavBar />
       <Outlet />
       <Footer />

@@ -22,37 +22,48 @@ const Connections = () => {
     fetchConnections()
   },[])
 
-  if (!connections) return; //if connections not there
+  if (!connections) return null;
 
-  if (connections.length === 0) return <h1 className="flex justify-center my-10">No Connections Found</h1> 
+if (connections.length === 0)
+  return <h1 className="no-connections">No Connections Found</h1>;
 
-  return (
-    <div className='text-center my-10'>
-      <h1 className='text-bold text-white text-3xl'>Connections</h1>
-      {connections.map( (connection) => {
-        const {firstName, lastName,photoUrl,  age, gender, about,_id} = connection;
+return (
+  <div className="connections-page">
+    <h1 className="connections-title">Connections</h1>
 
-        return (
-          <div className='flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto' key={_id}>
-            <div>
-              <img alt='photo' className='w-20 h-20 rounded-full' src={photoUrl}/>
-            </div>
-            
-            <div className='text-left mx-4'>
-              <h2 className='font-bold text-xl'>
-                {firstName + " "+lastName}
-                </h2>
-                {age && gender && <p>{age + " "+ gender}</p>}
-                <p>{about}</p>
-            </div>
-             
+    {connections.map((connection) => {
+      const { firstName, lastName, photoUrl, age, gender, about, _id } = connection;
+
+      return (
+        <div className="connection-card" key={_id}>
+          <div className="avatar-wrapper">
+            <img src={photoUrl} alt="profile" />
           </div>
-        )
-      })}
 
-    </div>
-    
-  )
+          <div className="connection-info">
+            <div className="name-row">
+              <h2>{firstName} {lastName}</h2>
+              <span className="status">Connected</span>
+            </div>
+
+            {age && gender && (
+              <p className="meta">{age} · {gender}</p>
+            )}
+
+            <p className="about">{about}</p>
+            <p className="active">Active today</p>
+          </div>
+
+          <div className="actions">
+            <button className="icon-btn">💬</button>
+            <button className="icon-btn">👁</button>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+);
+
 }
 
 export default Connections

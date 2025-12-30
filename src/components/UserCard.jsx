@@ -28,26 +28,30 @@ const UserCard = ({ user, hideButtons = false }) => {
   };
 
   return (
-    <div className="card bg-base-300 w-80 shadow-sm  h-110">
+    <div className="card bg-base-300 w-80 shadow-sm h-110">
       <figure>
         <img src={photoUrl} alt="Photo" />
       </figure>
+
       <div className="card-body">
         <h2 className="card-title">{firstName + " " + lastName}</h2>
-        {age && gender && <p>{age + " " + gender + " " + bio}</p>}
-        <p>{about}</p>
+
+        {age && gender && (
+          <p className="card-meta">
+            {age} {gender} {bio}
+          </p>
+        )}
+
+        <p className="card-about">{about}</p>
+
         {!hideButtons && (
-          <div className="card-actions justify-center my-4">
+          <div className="card-actions">
             <button
               className="btn btn-primary"
               onClick={() => handleSendRequest("ignore", _id)}
               disabled={loading !== null}
             >
-              {loading === "ignore" ? (
-                <span className="loading loading-dots loading-xl"></span>
-              ) : (
-                "Ignore"
-              )}
+              Ignore
             </button>
 
             <button
@@ -55,11 +59,7 @@ const UserCard = ({ user, hideButtons = false }) => {
               onClick={() => handleSendRequest("interested", _id)}
               disabled={loading !== null}
             >
-              {loading === "interested" ? (
-                <span className="loading loading-dots loading-xl"></span>
-              ) : (
-                "Interested"
-              )}
+              Interested
             </button>
           </div>
         )}
