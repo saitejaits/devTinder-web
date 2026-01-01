@@ -3,6 +3,7 @@ import { BASE_URL } from '../utils/constants'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { addConnections } from '../utils/connectionSlice'
+import { Link } from 'react-router-dom'
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections)
@@ -26,7 +27,7 @@ const Connections = () => {
 
 if (connections.length === 0)
   return <h1 className="no-connections">No Connections Found</h1>;
-
+  
 return (
   <div className="connections-page">
     <h1 className="connections-title">Connections</h1>
@@ -55,8 +56,9 @@ return (
           </div>
 
           <div className="actions">
-            <button className="icon-btn">💬</button>
-            <button className="icon-btn">👁</button>
+            <Link to={`/chat/${_id}`}><button className="icon-btn" >💬</button> </Link>
+            
+            <button className="icon-btn" >👁</button>
           </div>
         </div>
       );

@@ -34,7 +34,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className={location.pathname === "/profile" && "edit-page"}>
+    <div className={location.pathname === "/profile" ? "edit-page" : undefined}>
       <NavBar />
       <Outlet />
       <Footer />

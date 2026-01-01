@@ -55,3 +55,9 @@ Remaining:
 
 # Razorpay Payment Gateway Integration
 - Sign up on Razorpay  & complete KYC
+
+
+# Real Time CHat using Websocket(Socket.io)
+- Build the UI for a chat window on /chat/:targetUserId
+- Setup install Socket.io
+- npm i socket.io
