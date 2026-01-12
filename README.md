@@ -69,3 +69,5 @@ Remaining:
 - Homework: Fix bug - If I'm not friend then I should not be able send message
 - Homework: feat: Show Green Symbol online???? - [last seen 2 hours ago]
 - Homework: Limit messages when fetching from DB
+- Project Ideas: Ideas: Tic tac toe game
+- Project Ideas2: Chess
