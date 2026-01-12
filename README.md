@@ -61,3 +61,11 @@ Remaining:
 - Build the UI for a chat window on /chat/:targetUserId
 - Setup install Socket.io
 - npm i socket.io
+- Setup frontend socket.io-client
+- Initialise the chat
+- Listen to events
+- Homework: improve the UI
+- Homework : Fix Security Bug - Can I send messages to a person who is not my friend (auth in web sockets)
+- Homework: Fix bug - If I'm not friend then I should not be able send message
+- Homework: feat: Show Green Symbol online???? - [last seen 2 hours ago]
+- Homework: Limit messages when fetching from DB
